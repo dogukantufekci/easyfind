@@ -33,7 +33,7 @@ TEMPLATE_DEBUG = DEBUG
 ########## MANAGER CONFIGURATION
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#admins
 ADMINS = (
-    ('Your Name', 'your_email@example.com'),
+    ('Dogukan Tufekci', 'dogukan@creco.co'),
 )
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#managers
@@ -58,10 +58,10 @@ DATABASES = {
 
 ########## GENERAL CONFIGURATION
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#time-zone
-TIME_ZONE = 'America/Los_Angeles'
+TIME_ZONE = 'Asia/Nicosia'
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#language-code
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'en'
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#site-id
 SITE_ID = 1
@@ -109,8 +109,14 @@ STATICFILES_FINDERS = (
 ########## SECRET CONFIGURATION
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#secret-key
 # Note: This key should only be used for development and testing.
-SECRET_KEY = r"y%0=j_yma@-6b(7+ej%t0+bd8-_v!=xfue5tn1re2e6ju*uo)l"
+SECRET_KEY = "k2i*7=uiz^lr+(#+^h2&*8$+tfav()xud@x1wt*^c4t#ph6h2n"
 ########## END SECRET CONFIGURATION
+
+
+########## API SECRET CONFIGURATION
+# Note: This key should only be used for development and testing.
+API_SECRET_KEY = "change_it"
+########## END API SECRET CONFIGURATION
 
 
 ########## SITE CONFIGURATION
@@ -157,13 +163,14 @@ TEMPLATE_DIRS = (
 ########## MIDDLEWARE CONFIGURATION
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#middleware-classes
 MIDDLEWARE_CLASSES = (
-    # Default Django middleware.
-    'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware', 
+    'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'lezizfirsat_vb.middleware.TimezoneMiddleware',
 )
 ########## END MIDDLEWARE CONFIGURATION
 
@@ -194,6 +201,16 @@ DJANGO_APPS = (
 
 # Apps specific for this project go here.
 LOCAL_APPS = (
+    'allaccess',
+    'auth',
+    'connections',
+    'deal_manager',
+    'deals',
+    'favorite_places',
+    'places',
+    'products',
+    'saved_deals',
+    'users',
 )
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
@@ -240,12 +257,65 @@ WSGI_APPLICATION = '%s.wsgi.application' % SITE_NAME
 ########## END WSGI CONFIGURATION
 
 
-########## SOUTH CONFIGURATION
-# See: http://south.readthedocs.org/en/latest/installation.html#configuring-your-django-installation
-INSTALLED_APPS += (
-    # Database migration helpers:
-    'south',
+# ########## SOUTH CONFIGURATION
+# # See: http://south.readthedocs.org/en/latest/installation.html#configuring-your-django-installation
+# INSTALLED_APPS += (
+#     # Database migration helpers:
+#     'south',
+# )
+# # Don't need to use South when setting up a test database.
+# SOUTH_TESTS_MIGRATE = False
+# ########## END SOUTH CONFIGURATION
+
+
+########## TRANSLATION CONFIGURATION
+# https://docs.djangoproject.com/en/1.6/topics/i18n/translation/#how-django-discovers-language-preference
+from django.utils.translation import ugettext_lazy as _
+
+LANGUAGES = (
+    ('en', _('English')),
+    ('tr', _('Turkish')),
 )
-# Don't need to use South when setting up a test database.
-SOUTH_TESTS_MIGRATE = False
-########## END SOUTH CONFIGURATION
+
+LOCALE_PATHS = (
+    normpath(join(SITE_ROOT, 'locale')),
+)
+########## END TRANSLATION CONFIGURATION
+
+
+########## AUTH CONFIGURATION
+# https://docs.djangoproject.com/en/1.6/ref/settings/#auth-user-model
+AUTH_USER_MODEL = 'users.User'
+
+LOGIN_URL = '/auth/login/'
+LOGIN_REDIRECT_URL = '/deals/'
+LOGOUT_URL = '/auth/logout/'
+LOGOUT_REDIRECT_URL = '/auth/logout/after/'
+
+# https://docs.djangoproject.com/en/1.6/ref/settings/#authentication-backends
+AUTHENTICATION_BACKENDS = (
+    # Default backend
+    'django.contrib.auth.backends.ModelBackend',
+    # Additional backend for facebook connections
+    'connections.backends.FacebookConnectionBackend',
+)
+########## END AUTH CONFIGURATION
+
+
+########## GEOPOSITION CONFIGURATION
+INSTALLED_APPS += (
+    'geoposition',
+)
+########## END GEOPOSITION CONFIGURATION
+
+
+########## DEAL MANAGER CONFIGURATION
+DISCOUNT_RATE = 0.5
+########## END DEAL MANAGER CONFIGURATION
+
+
+########## ZEROPUSH CONFIGURATION
+INSTALLED_APPS += (
+    'zeropush',
+)
+########## END ZEROPUSH CONFIGURATION

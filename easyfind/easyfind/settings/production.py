@@ -21,7 +21,7 @@ def get_env_setting(setting):
 
 ########## HOST CONFIGURATION
 # See: https://docs.djangoproject.com/en/1.5/releases/1.5/#allowed-hosts-required-in-production
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['lezizfirsat-vb.herokuapp.com', 'vb.lezizfirsat.com']
 ########## END HOST CONFIGURATION
 
 ########## EMAIL CONFIGURATION
@@ -35,7 +35,7 @@ EMAIL_HOST = environ.get('EMAIL_HOST', 'smtp.gmail.com')
 EMAIL_HOST_PASSWORD = environ.get('EMAIL_HOST_PASSWORD', '')
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#email-host-user
-EMAIL_HOST_USER = environ.get('EMAIL_HOST_USER', 'your_email@example.com')
+EMAIL_HOST_USER = environ.get('EMAIL_HOST_USER', 'no-reply@lezizfirsat.com')
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#email-port
 EMAIL_PORT = environ.get('EMAIL_PORT', 587)
@@ -51,13 +51,37 @@ SERVER_EMAIL = EMAIL_HOST_USER
 ########## END EMAIL CONFIGURATION
 
 ########## DATABASE CONFIGURATION
-DATABASES = {}
+import dj_database_url
+
+DATABASES = {
+    'default': dj_database_url.config()
+}
 ########## END DATABASE CONFIGURATION
 
 
 ########## CACHE CONFIGURATION
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#caches
-CACHES = {}
+def get_cache():
+    try:
+        environ['MEMCACHE_SERVERS'] = environ['MEMCACHIER_SERVERS']
+        environ['MEMCACHE_USERNAME'] = environ['MEMCACHIER_USERNAME']
+        environ['MEMCACHE_PASSWORD'] = environ['MEMCACHIER_PASSWORD']
+        return {
+            'default': {
+                'BACKEND': 'django_pylibmc.memcached.PyLibMCCache',
+                'LOCATION': environ['MEMCACHIER_SERVERS'],
+                'TIMEOUT': 500,
+                'BINARY': True,
+            }
+        }
+    except:
+        return {
+            'default': {
+                'BACKEND': 'django.core.cache.backends.locmem.LocMemCache'
+            }
+        }
+
+CACHES = get_cache()
 ########## END CACHE CONFIGURATION
 
 
@@ -65,3 +89,62 @@ CACHES = {}
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#secret-key
 SECRET_KEY = get_env_setting('SECRET_KEY')
 ########## END SECRET CONFIGURATION
+
+
+########## API SECRET CONFIGURATION
+# See: https://docs.djangoproject.com/en/dev/ref/settings/#secret-key
+API_SECRET_KEY = get_env_setting('API_SECRET_KEY')
+########## END API SECRET CONFIGURATION
+
+
+########## SITE CONFIGURATION
+SITE_URL = 'http://easyfindapp.herokuapp.com'
+########## END SITE CONFIGURATION
+
+
+########## AWS S3 CONFIGURATION
+DEFAULT_FILE_STORAGE = '%s.s3utils.MediaS3BotoStorage' % SITE_NAME
+STATICFILES_STORAGE = '%s.s3utils.StaticS3BotoStorage' % SITE_NAME
+
+AWS_ACCESS_KEY_ID = get_env_setting('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = get_env_setting('AWS_SECRET_ACCESS_KEY')
+AWS_STORAGE_BUCKET_NAME = get_env_setting('AWS_STORAGE_BUCKET_NAME')
+AWS_AUTO_CREATE_BUCKET = True
+AWS_QUERYSTRING_AUTH = False
+
+S3_URL = 'https://%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+STATIC_DIRECTORY = '/static/'
+MEDIA_DIRECTORY = '/media/'
+STATIC_URL = S3_URL + STATIC_DIRECTORY
+MEDIA_URL = S3_URL + MEDIA_DIRECTORY
+
+# AWS cache settings, don't change unless you know what you're doing:
+AWS_EXPIRY = 60 * 60 * 24 * 7
+AWS_HEADERS = {
+    'Cache-Control': 'max-age=%d, s-maxage=%d, must-revalidate' % (AWS_EXPIRY, AWS_EXPIRY)
+}
+########## END AWS S3 CONFIGURATION
+
+
+# ########## COMPRESSION CONFIGURATION
+# # See: http://django_compressor.readthedocs.org/en/latest/settings/#django.conf.settings.COMPRESS_OFFLINE
+# COMPRESS_OFFLINE = True
+
+# # See: http://django_compressor.readthedocs.org/en/latest/settings/#django.conf.settings.COMPRESS_STORAGE
+# COMPRESS_STORAGE = DEFAULT_FILE_STORAGE
+
+# # See: http://django_compressor.readthedocs.org/en/latest/settings/#django.conf.settings.COMPRESS_CSS_FILTERS
+# COMPRESS_CSS_FILTERS += [
+#     'compressor.filters.cssmin.CSSMinFilter',
+# ]
+
+# # See: http://django_compressor.readthedocs.org/en/latest/settings/#django.conf.settings.COMPRESS_JS_FILTERS
+# COMPRESS_JS_FILTERS += [
+#     'compressor.filters.jsmin.JSMinFilter',
+# ]
+# ########## END COMPRESSION CONFIGURATION
+
+
+########## ZEROPUSH CONFIGURATION
+ZEROPUSH_AUTH_TOKEN = '1vLdViPP7s4ydPmKzs2z'
+########## END ZEROPUSH CONFIGURATION

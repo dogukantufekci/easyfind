@@ -19,6 +19,9 @@ TEMPLATE_DEBUG = DEBUG
 ########## EMAIL CONFIGURATION
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#email-backend
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+# See: https://docs.djangoproject.com/en/dev/ref/settings/#email-host-user
+EMAIL_HOST_USER = ''
 ########## END EMAIL CONFIGURATION
 
 
@@ -26,13 +29,13 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#databases
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': normpath(join(DJANGO_ROOT, 'default.db')),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'lezizfirsat_vb',
         'USER': '',
         'PASSWORD': '',
-        'HOST': '',
-        'PORT': '',
-    }
+        'HOST': 'localhost',
+        'PORT': '5432',
+    },
 }
 ########## END DATABASE CONFIGURATION
 
@@ -62,3 +65,12 @@ DEBUG_TOOLBAR_PATCH_SETTINGS = False
 # http://django-debug-toolbar.readthedocs.org/en/latest/installation.html
 INTERNAL_IPS = ('127.0.0.1',)
 ########## END TOOLBAR CONFIGURATION
+
+########## SITE CONFIGURATION
+SITE_URL = 'http://localhost:8000'
+########## END SITE CONFIGURATION
+
+
+########## ZEROPUSH CONFIGURATION
+ZEROPUSH_AUTH_TOKEN = 'Ey4Zrh4DZDrupa5nR9cT'
+########## END ZEROPUSH CONFIGURATION
