@@ -15,4 +15,7 @@ db = client.get_default_database()
 def home(request):
     db.notifications.insert({'asdf': 'india2'})
     result = db.notifications.find({'asdf': 'india2'})
-    return HttpResponse(result[0]['asdf'])
+    if len(result) > 0:
+        return HttpResponse(result[0]['asdf'])
+    else:
+        return HttpResponse('veri yoktu')
