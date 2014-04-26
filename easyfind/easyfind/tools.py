@@ -1,5 +1,5 @@
 import datetime
-import math
+
 from random import random
 from hashlib import sha512
 
@@ -18,7 +18,7 @@ def generate_digit_key(length):
     if length > 12:
         message = "Length must be less than or equal to 12"
         raise ValueError(message)
-    return str(random())[2:2 + length]
+    return str(random())[2:2+length]
 
 
 def paginate(objects, limit, page):
@@ -38,7 +38,3 @@ def paginate(objects, limit, page):
         # If page is out of range (e.g. 9999), deliver last page of results.
         page_objects = paginator.page(paginator.num_pages)
     return paginator, page_objects
-
-
-def distance(p0, p1):
-    return math.sqrt((p0[0] - p1[0]) ** 2 + (p0[1] - p1[1]) ** 2)
