@@ -75,3 +75,11 @@ SITE_URL = 'http://localhost:8000'
 ########## ZEROPUSH CONFIGURATION
 ZEROPUSH_AUTH_TOKEN = 'TyjXXmyiai8XAqMyzEsQ'
 ########## END ZEROPUSH CONFIGURATION
+
+
+########## MONGO CLIENT CONFIGURATION
+import pymongo
+
+uri = "mongodb://dogukan:krl152..@oceanic.mongohq.com:10002/easyfind-development"
+client = pymongo.MongoClient(uri)
+########## END MONGO CLIENT CONFIGURATION
