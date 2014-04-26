@@ -14,7 +14,7 @@ client = pymongo.MongoClient(settings.MONGO_URI)
 db = client.get_default_database()
 
 
-@require_http_methods(['GET')
+@require_http_methods(['GET'])
 @authenticate_request
 def notifications(request):
     # Get jobs
