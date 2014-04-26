@@ -21,7 +21,7 @@ def get_env_setting(setting):
 
 ########## HOST CONFIGURATION
 # See: https://docs.djangoproject.com/en/1.5/releases/1.5/#allowed-hosts-required-in-production
-ALLOWED_HOSTS = ['lezizfirsat-vb.herokuapp.com', 'vb.lezizfirsat.com']
+ALLOWED_HOSTS = ['easyfindapp.herokuapp.com',]
 ########## END HOST CONFIGURATION
 
 ########## EMAIL CONFIGURATION
@@ -35,7 +35,7 @@ EMAIL_HOST = environ.get('EMAIL_HOST', 'smtp.gmail.com')
 EMAIL_HOST_PASSWORD = environ.get('EMAIL_HOST_PASSWORD', '')
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#email-host-user
-EMAIL_HOST_USER = environ.get('EMAIL_HOST_USER', 'no-reply@lezizfirsat.com')
+EMAIL_HOST_USER = environ.get('EMAIL_HOST_USER', '')
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#email-port
 EMAIL_PORT = environ.get('EMAIL_PORT', 587)
@@ -146,5 +146,5 @@ AWS_HEADERS = {
 
 
 ########## ZEROPUSH CONFIGURATION
-ZEROPUSH_AUTH_TOKEN = '1vLdViPP7s4ydPmKzs2z'
+ZEROPUSH_AUTH_TOKEN = '3EZttS4bxS3379KGb65G'
 ########## END ZEROPUSH CONFIGURATION

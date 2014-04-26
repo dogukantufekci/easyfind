@@ -30,7 +30,7 @@ EMAIL_HOST_USER = ''
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'lezizfirsat_vb',
+        'NAME': 'easyfind',
         'USER': '',
         'PASSWORD': '',
         'HOST': 'localhost',
@@ -72,5 +72,5 @@ SITE_URL = 'http://localhost:8000'
 
 
 ########## ZEROPUSH CONFIGURATION
-ZEROPUSH_AUTH_TOKEN = 'Ey4Zrh4DZDrupa5nR9cT'
+ZEROPUSH_AUTH_TOKEN = 'TyjXXmyiai8XAqMyzEsQ'
 ########## END ZEROPUSH CONFIGURATION
