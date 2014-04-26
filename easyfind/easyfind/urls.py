@@ -7,14 +7,17 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-                       # home
-                       url(r'^$', 'easyfind.views.home', name='home'),
 
+    # home
+    url(r'^$', 'easyfind.views.home', name='home'),
 
-                       url(r'^notifications/', include('notifications.urls', namespace='notifications', app_name='notifications')),
+    url(r'^api/connect/', include('connect.urls', namespace='connect', app_name='connect')),
+    url(r'^api/jobs/', include('jobs.urls', namespace='jobs', app_name='jobs')),
+    url(r'^api/notifications/', include('notifications.urls', namespace='notifications', app_name='notifications')),
+    url(r'^api/offers/', include('offers.urls', namespace='offers', app_name='offers')),
 
-                       # django admin
-                       url(r'^admin/', include(admin.site.urls))
+    # django admin
+    url(r'^admin/', include(admin.site.urls))
 )
 
 # Serve static files
@@ -25,5 +28,5 @@ if settings.DEBUG:
     import debug_toolbar
 
     urlpatterns += patterns('',
-                            url(r'^__debug__/', include(debug_toolbar.urls)),
+        url(r'^__debug__/', include(debug_toolbar.urls)),
     )
