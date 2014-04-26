@@ -32,14 +32,14 @@ class Title(AbstractModel):
 
 
 class SellerTitle(AbstractModel):
-    user = models.ForeignKey('sellers.Seller', verbose_name=_("User"))
+    seller = models.ForeignKey('sellers.Seller', verbose_name=_("User"))
     title = models.ForeignKey('sellers.Title', verbose_name=_("Title"))
 
 
     class Meta:
-        ordering = ('user', '-created_on',)
-        unique_together = ('user', 'title')
+        ordering = ('seller', '-created_on',)
+        unique_together = ('seller', 'title')
 
 
     def __unicode__(self):
-        return _(u"{user} is {title}").format(user=self.user.get_full_name(), title=self.title.title)
+        return _(u"{seller} is {title}").format(seller=self.seller.user.get_full_name(), title=self.title.title)
