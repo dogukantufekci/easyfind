@@ -1,53 +1,61 @@
-from django.core.urlresolvers import reverse
-from django.http import Http404, HttpResponseRedirect
-from django.shortcuts import render
-from django.utils.translation import ugettext_lazy as _
+import json
 
-from easyfind.tools import paginate
+from django.core.serializers.json import DjangoJSONEncoder
+from django.http import HttpResponse
+from django.template.defaultfilters import date as _date
+from django.utils.timezone import localtime
+from django.views.decorators.http import require_http_methods
 
-from .models import Deal
+from easyfind.decorators import authenticate_request
+from easyfind.tools import get_response, paginate
+
+from .models import Job
 
 
-def home(request):
-    return HttpResponseRedirect(reverse('deals:today'))
-
-
-def today(request):
-    # Get deals
-    deals = Deal.objects.today()
-    # Paginate deals
-    paginator, page_deals = paginate(deals, 5, request.GET.get('page'))
-    # Respond
-    return render(request, 'deals/deals.html', {
-        'title': _('Deals for Today'),
-        'no_deal_message': _('Whoops. There is no today deal.'),
-        'paginator': paginator,
-        'deals': page_deals,
-    })
-
+@require_http_methods(['GET', 'POST'])
+@authenticate_request
+def jobs(request):
+    if request.method == 'GET':
+        # Get jobs
+        jobs = Job.objects.filter(buyer=request.user)
+        # Paginate jobs
+        paginator, page_objects = paginate(jobs, request.GET.get('limit'), request.GET.get('page'))
+        # Prepare data
+        data = []
+        for page_object in page_objects:
+            data.append({
+                'id': page_object.id,
+                'buyer': {
+                    'id': page_object.buyer.id,
+                    'name': page_object.buyer.get_full_name(),
+                },
+                'title': {
+                    'id': page_object.title.id,
+                    'title': page_object.title.title,
+                },
+                'geoposition': {
+                    'latitude': page_object.geoposition.latitude,
+                    'longitude': page_object.geoposition.longitude,
+                },
+                'start_on': _date(localtime(page_object.start_on)),
+                'start_asap': page_object.start_asap,
+            })
+        # Respond
+        response = get_response(request, page_objects, data)
     
-def future(request):
-    # Get deals
-    deals = Deal.objects.future()
-    # Paginate deals
-    paginator, page_deals = paginate(deals, 5, request.GET.get('page'))
-    # Respond
-    return render(request, 'deals/deals.html', {
-        'title': _('Future Deals'),
-        'no_deal_message': _('Whoops. There is no future deal.'),
-        'paginator': paginator,
-        'deals': page_deals,
-    })
+    elif request.method == 'POST':
+        pass
+
+    return HttpResponse(json.dumps(response, sort_keys=True, indent=4, cls=DjangoJSONEncoder), content_type="application/json")
 
 
-def deal(request, year, month, day, slug, deal_id):
-    # Get active deal or 404
-    try:
-        deal = Deal.objects.get(id=deal_id, is_active=True)
-    except Deal.DoesNotExist:
-        raise Http404
-    # Respond
-    return render(request, 'deals/deal.html', {
-        'title': deal.get_short_title(),
-        'deal': deal,
-    })
+@require_http_methods(['GET'])
+@authenticate_request
+def offer(request, offer_id):
+    pass
+
+
+@require_http_methods(['GET'])
+@authenticate_request
+def job_offers(request, offer_id):
+    pass
