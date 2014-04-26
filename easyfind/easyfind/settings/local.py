@@ -31,8 +31,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'easyfind',
-        'USER': '',
-        'PASSWORD': '',
+        'USER': 'dogukan',
+        'PASSWORD': 'krl152..',
         'HOST': 'localhost',
         'PORT': '5432',
     },
@@ -54,6 +54,7 @@ CACHES = {
 # See: http://django-debug-toolbar.readthedocs.org/en/latest/installation.html#explicit-setup
 INSTALLED_APPS += (
     'debug_toolbar',
+    'easyfind',
 )
 
 MIDDLEWARE_CLASSES += (

@@ -1,3 +1,10 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import Seller
+
+
+class JobAdmin(admin.ModelAdmin):
+    pass
+
+
+admin.site.register(Seller, JobAdmin)
