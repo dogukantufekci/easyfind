@@ -204,6 +204,7 @@ LOCAL_APPS = (
     'jobs',
     'offers',
     'sellers',
+    'transactions',
     'users',
 )
 
