@@ -13,8 +13,6 @@ class UserManager(BaseUserManager):
         # Check for username
         if not username:
             raise ValueError(_('Username is a required field.'))
-        if not User.is_unique_username(username):
-            raise ValueError(_('Username must be unique.'))
         # Get user model instance
         user = self.model(username=username, **extra_fields)
         # Set user active

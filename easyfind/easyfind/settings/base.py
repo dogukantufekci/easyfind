@@ -170,7 +170,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'lezizfirsat_vb.middleware.TimezoneMiddleware',
+    'easyfind.middleware.TimezoneMiddleware',
 )
 ########## END MIDDLEWARE CONFIGURATION
 

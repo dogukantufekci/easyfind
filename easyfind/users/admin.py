@@ -4,7 +4,7 @@ from .models import User
 
 
 class UserAdmin(admin.ModelAdmin):
-    fields = ('first_name', 'last_name', 'birthday', 'gender', 'language', 'timezone', 'is_staff', 'is_active', 'username', 'email', 'password', 'created_on', 'updated_on', 'last_login',)
+    fields = ('first_name', 'last_name', 'birthday', 'gender', 'language', 'timezone', 'is_superuser', 'is_staff', 'is_active', 'username', 'email', 'password', 'created_on', 'updated_on', 'last_login',)
     readonly_fields = ('password', 'created_on', 'updated_on', 'last_login',)
 
 
