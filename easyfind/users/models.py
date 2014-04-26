@@ -4,6 +4,8 @@ from django.db import models
 from django.db.models import Q
 from django.utils.translation import ugettext_lazy as _
 
+from easyfind.models import AbstractModel
+
 from .choices import Genders, Timezones
 
 
@@ -58,6 +60,8 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     language = models.CharField(choices=settings.LANGUAGES, default=settings.LANGUAGE_CODE, max_length=LANGUAGE_MAX_LENGTH, verbose_name=_("Language"))
     timezone = models.CharField(choices=Timezones.CHOICES, default=settings.TIME_ZONE, max_length=TIMEZONE_MAX_LENGTH, verbose_name=_("Timezone"))
+
+
 
     # admin
     is_staff = models.BooleanField(default=False, verbose_name=_("Is staff"))
