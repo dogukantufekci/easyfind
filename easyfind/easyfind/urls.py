@@ -10,9 +10,11 @@ urlpatterns = patterns('',
                        # home
                        url(r'^$', 'easyfind.views.home', name='home'),
 
-                       # django admin
-                       url(r'^admin/', include(admin.site.urls)),
 
+                       url(r'^notifications/', include('notifications.urls', namespace='notifications', app_name='notifications')),
+
+                       # django admin
+                       url(r'^admin/', include(admin.site.urls))
 )
 
 # Serve static files
