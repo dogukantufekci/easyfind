@@ -1,10 +1,10 @@
 from django.contrib import admin
 
-from models import Offer
+from .models import Offer
 
 
-class JobAdmin(admin.ModelAdmin):
+class OfferAdmin(admin.ModelAdmin):
     pass
 
 
-admin.site.register(Offer, JobAdmin)
+admin.site.register(Offer, OfferAdmin)

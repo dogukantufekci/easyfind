@@ -1,10 +1,10 @@
 from django.contrib import admin
 
-from .models import Job
+from .models import Transaction
 
 
-class JobAdmin(admin.ModelAdmin):
+class TransactionAdmin(admin.ModelAdmin):
     pass
 
 
-admin.site.register(Job, JobAdmin)
+admin.site.register(Transaction, TransactionAdmin)
