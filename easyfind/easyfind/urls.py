@@ -8,12 +8,10 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     # home
-    url(r'^$', 'lezizfirsat_vb.views.home', name='home'),
-    # change language
-    url(r'^change_language/$', 'lezizfirsat_vb.views.change_language', name='change_language'),
+    url(r'^$', 'easyfind.views.home', name='home'),
 
-    # api
-    url(r'^api/', include('api.urls', namespace='api', app_name='api')),
+    # django admin
+    url(r'^admin/', include(admin.site.urls)),
 )
 
 # Serve static files
