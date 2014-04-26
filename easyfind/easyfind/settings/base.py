@@ -58,7 +58,7 @@ DATABASES = {
 
 ########## GENERAL CONFIGURATION
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#time-zone
-TIME_ZONE = 'Asia/Nicosia'
+TIME_ZONE = 'Europe/Istanbul'
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#language-code
 LANGUAGE_CODE = 'en'
@@ -201,16 +201,8 @@ DJANGO_APPS = (
 
 # Apps specific for this project go here.
 LOCAL_APPS = (
-    'allaccess',
-    'auth',
-    'connections',
-    'deal_manager',
-    'deals',
-    'favorite_places',
-    'places',
-    'products',
-    'saved_deals',
     'users',
+    'skills',
 )
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
@@ -287,17 +279,10 @@ LOCALE_PATHS = (
 # https://docs.djangoproject.com/en/1.6/ref/settings/#auth-user-model
 AUTH_USER_MODEL = 'users.User'
 
-LOGIN_URL = '/auth/login/'
-LOGIN_REDIRECT_URL = '/deals/'
-LOGOUT_URL = '/auth/logout/'
-LOGOUT_REDIRECT_URL = '/auth/logout/after/'
-
 # https://docs.djangoproject.com/en/1.6/ref/settings/#authentication-backends
 AUTHENTICATION_BACKENDS = (
     # Default backend
     'django.contrib.auth.backends.ModelBackend',
-    # Additional backend for facebook connections
-    'connections.backends.FacebookConnectionBackend',
 )
 ########## END AUTH CONFIGURATION
 
@@ -307,11 +292,6 @@ INSTALLED_APPS += (
     'geoposition',
 )
 ########## END GEOPOSITION CONFIGURATION
-
-
-########## DEAL MANAGER CONFIGURATION
-DISCOUNT_RATE = 0.5
-########## END DEAL MANAGER CONFIGURATION
 
 
 ########## ZEROPUSH CONFIGURATION
