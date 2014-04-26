@@ -11,11 +11,11 @@ class Genders:
 
     @staticmethod
     def get_value(gender):
-        if gender.lower() == 'male':
+        gender = gender.lower()
+        if gender == 'male' or gender == 'm':
             return Genders.MALE
-        elif gender.lower() == 'female':
+        if gender == 'female' or gender == 'f':
             return Genders.FEMALE
-        return
 
 
 class Timezones:

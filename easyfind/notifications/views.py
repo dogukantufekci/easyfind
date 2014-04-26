@@ -1,21 +1,24 @@
+import json
+
 import pymongo
 
-from django.core.urlresolvers import reverse
-from django.http import HttpResponse
-from django.shortcuts import redirect, render
-from django.utils.translation import ugettext_lazy as _
-
 from django.conf import settings
+from django.core.serializers.json import DjangoJSONEncoder
+from django.http import HttpResponse
+from django.views.decorators.http import require_http_methods
+
+from easyfind.decorators import authenticate_request
+
 
 client = pymongo.MongoClient(settings.MONGO_URI)
-
 db = client.get_default_database()
 
 
-def home(request):
-    db.notifications.insert({'asdf': 'india2'})
-    result = db.notifications.find({'asdf': 'india2'})
-    if len(result) > 0:
-        return HttpResponse(result[0]['asdf'])
-    else:
-        return HttpResponse('veri yoktu')
+@require_http_methods(['GET')
+@authenticate_request
+def notifications(request):
+    # Get jobs
+    notifications = db.notifications.find({})
+    # Respond
+    response = {'data': notifications}
+    return HttpResponse(json.dumps(response, sort_keys=True, indent=4, cls=DjangoJSONEncoder), content_type="application/json")

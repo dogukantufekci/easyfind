@@ -38,3 +38,36 @@ def paginate(objects, limit, page):
         # If page is out of range (e.g. 9999), deliver last page of results.
         page_objects = paginator.page(paginator.num_pages)
     return paginator, page_objects
+
+
+def get_response(request, page_objects, data):
+    # Response data
+    response = {'data': data}
+    # Response next
+    if page_objects.has_next():
+        next = "%s?" % request.path
+        if request.GET.get('limit'):
+            next += "limit=%s&" % request.GET['limit']
+        if request.GET.get('secret_key'):
+            next += "secret_key=%s&" % request.GET['secret_key']
+        if request.GET.get('user_id'):
+            next += "user_id=%s&" % request.GET['user_id']
+        next += "page=%s" % page_objects.next_page_number()
+        response.update({'next': next})
+    else:
+        response.update({'next': None})
+    # Response previous
+    if page_objects.has_previous():
+        previous = "%s?" % request.path
+        if request.GET.get('limit'):
+            previous += "limit=%s&" % request.GET['limit']
+        if request.GET.get('secret_key'):
+            previous += "secret_key=%s&" % request.GET['secret_key']
+        if request.GET.get('user_id'):
+            previous += "user_id=%s&" % request.GET['user_id']
+        previous += "page=%s" % page_objects.previous_page_number()
+        response.update({'previous': previous})
+    else:
+        response.update({'previous': None})
+
+    return response
