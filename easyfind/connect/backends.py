@@ -1,5 +1,7 @@
 from django.contrib.auth.backends import ModelBackend
 
+from users.models import User
+
 
 class ConnectPayPalBackend(ModelBackend):
     "Authentication backend for users registered with PayPal OAuth provider."
