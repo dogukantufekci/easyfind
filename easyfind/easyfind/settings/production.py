@@ -152,5 +152,10 @@ ZEROPUSH_AUTH_TOKEN = '3EZttS4bxS3379KGb65G'
 
 
 ########## MONGO CLIENT CONFIGURATION
+<<<<<<< HEAD
 MONGO_URI = "mongodb://dogukan:krl152..@oceanic.mongohq.com:10002/easyfind-production"
 ########## END MONGO CLIENT CONFIGURATION
+=======
+MONGO_URI = "mongodb://dogukan:krl152..@oceanic.mongohq.com:10001/easyfind-production"
+########## END MONGO CLIENT CONFIGURATION
+>>>>>>> 101d1cf21a9f8d0804539372239f0bf9ecf0823f
