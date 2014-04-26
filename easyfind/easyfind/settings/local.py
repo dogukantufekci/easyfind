@@ -78,8 +78,5 @@ ZEROPUSH_AUTH_TOKEN = 'TyjXXmyiai8XAqMyzEsQ'
 
 
 ########## MONGO CLIENT CONFIGURATION
-import pymongo
-
-uri = "mongodb://dogukan:krl152..@oceanic.mongohq.com:10002/easyfind-development"
-client = pymongo.MongoClient(uri)
+MONGO_URI = "mongodb://dogukan:krl152..@oceanic.mongohq.com:10002/easyfind-development"
 ########## END MONGO CLIENT CONFIGURATION
