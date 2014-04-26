@@ -15,4 +15,9 @@ class Transaction(AbstractModel):
 
 
     def __unicode__(self):
-        return _(u"{buyer} needs a {title}").format(buyer=self.buyer.get_full_name(), title=self.title.title)
+        return _(u"Transaction from {buyer} to {seller} in amount of ${amount} via Offer {offer}").format(
+            buyer=self.buyer.get_full_name(), 
+            seller=self.seller.get_full_name(), 
+            amount=self.amount, 
+            offer=self.offer.id,
+        )
