@@ -41,6 +41,7 @@ class UserManager(BaseUserManager):
 
 class User(AbstractBaseUser, PermissionsMixin):
     NAME_MAX_LENGTH = 30
+    PAYPAL_ID_MAX_LENGTH = 255
     USERNAME_MAX_LENGTH = 30
     EMAIL_MAX_LENGTH = 255
     LANGUAGE_MAX_LENGTH = 5
@@ -51,6 +52,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     username = models.CharField(max_length=USERNAME_MAX_LENGTH, unique=True, verbose_name=_("Username"))
     email = models.EmailField(max_length=EMAIL_MAX_LENGTH, unique=True, verbose_name=_("Email"))
+    paypal_id = models.CharField(max_length=PAYPAL_ID_MAX_LENGTH, unique=True, blank=True, null=True, verbose_name=_("PayPal ID"))
     
     first_name = models.CharField(max_length=NAME_MAX_LENGTH, verbose_name=_("First name"))
     last_name = models.CharField(max_length=NAME_MAX_LENGTH, verbose_name=_("Last name"))
@@ -60,8 +62,6 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     language = models.CharField(choices=settings.LANGUAGES, default=settings.LANGUAGE_CODE, max_length=LANGUAGE_MAX_LENGTH, verbose_name=_("Language"))
     timezone = models.CharField(choices=Timezones.CHOICES, default=settings.TIME_ZONE, max_length=TIMEZONE_MAX_LENGTH, verbose_name=_("Timezone"))
-
-
 
     # admin
     is_staff = models.BooleanField(default=False, verbose_name=_("Is staff"))
