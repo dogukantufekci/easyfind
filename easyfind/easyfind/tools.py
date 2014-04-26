@@ -11,7 +11,7 @@ def generate_key(length, extra=None):
     if length > 128:
         message = "Length must be less than or equal to 128"
         raise ValueError(message)
-    return sha512(str(random())+str(extra)).hexdigest()[:length]
+    return sha512(str(random()) + str(extra)).hexdigest()[:length]
 
 
 def generate_digit_key(length):

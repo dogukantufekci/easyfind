@@ -75,3 +75,8 @@ SITE_URL = 'http://localhost:8000'
 ########## ZEROPUSH CONFIGURATION
 ZEROPUSH_AUTH_TOKEN = 'TyjXXmyiai8XAqMyzEsQ'
 ########## END ZEROPUSH CONFIGURATION
+
+
+########## MONGO CLIENT CONFIGURATION
+MONGO_URI = "mongodb://dogukan:krl152..@oceanic.mongohq.com:10002/easyfind-development"
+########## END MONGO CLIENT CONFIGURATION

@@ -21,7 +21,7 @@ def get_env_setting(setting):
 
 ########## HOST CONFIGURATION
 # See: https://docs.djangoproject.com/en/1.5/releases/1.5/#allowed-hosts-required-in-production
-ALLOWED_HOSTS = ['easyfindapp.herokuapp.com',]
+ALLOWED_HOSTS = ['easyfindapp.herokuapp.com', ]
 ########## END HOST CONFIGURATION
 
 ########## EMAIL CONFIGURATION
@@ -80,6 +80,7 @@ def get_cache():
                 'BACKEND': 'django.core.cache.backends.locmem.LocMemCache'
             }
         }
+
 
 CACHES = get_cache()
 ########## END CACHE CONFIGURATION
@@ -148,3 +149,8 @@ AWS_HEADERS = {
 ########## ZEROPUSH CONFIGURATION
 ZEROPUSH_AUTH_TOKEN = '3EZttS4bxS3379KGb65G'
 ########## END ZEROPUSH CONFIGURATION
+
+
+########## MONGO CLIENT CONFIGURATION
+MONGO_URI = "mongodb://dogukan:krl152..@oceanic.mongohq.com:10001/easyfind-production"
+########## END MONGO CLIENT CONFIGURATION
