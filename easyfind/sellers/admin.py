@@ -3,8 +3,8 @@ from django.contrib import admin
 from .models import Seller
 
 
-class JobAdmin(admin.ModelAdmin):
+class SellerAdmin(admin.ModelAdmin):
     pass
 
 
-admin.site.register(Seller, JobAdmin)
+admin.site.register(Seller, SellerAdmin)
