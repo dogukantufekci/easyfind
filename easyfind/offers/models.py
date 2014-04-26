@@ -7,6 +7,7 @@ from easyfind.models import AbstractModel
 
 from .choices import Statuses
 
+
 class Offer(AbstractModel):
     PRICE_MAX_DIGITS = 8
     PRICE_DECIMAL_PLACES = 2
