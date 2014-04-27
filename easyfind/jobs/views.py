@@ -13,6 +13,7 @@ from easyfind.decorators import authenticate_request
 
 from .forms import JobForm
 from .models import Job
+from .tools import zeropush_new_job
 
 
 @require_http_methods(['GET', 'POST'])
@@ -55,6 +56,8 @@ def jobs(request):
             job.start_on = timezone.now()
             job.geoposition = Geoposition(form.cleaned_data['geoposition_0'], form.cleaned_data['geoposition_1'])
             job.save()
+            # Notify sellers
+            zeropush_new_job(job)
             # Return with created job as response
             response = {
                 'data': {
