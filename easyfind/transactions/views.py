@@ -5,8 +5,6 @@ from django.conf import settings
 from django.http import HttpResponse
 
 
-
-
 def buy(request):
     paypalrestsdk.configure({
         "mode": settings.PAYPAL_MODE,
@@ -20,12 +18,14 @@ def buy(request):
         # A resource representing a Payer that funds a payment
         # Payment Method as 'paypal'
         "payer": {
-            "payment_method": "paypal"},
+            "payment_method": "paypal"
+        },
 
         # ###Redirect URLs
         "redirect_urls": {
-            "return_url": "https://veyselsahin.com.tr/onur/api/payment_callback",
-            "cancel_url": "http://localhost:3000/"},
+            "return_url": settings.PAYPAL_RETURN_URL,
+            "cancel_url": settings.PAYPAL_CANCEL_URL,
+        },
 
         # ###Transaction
         # A transaction defines the contract of a
