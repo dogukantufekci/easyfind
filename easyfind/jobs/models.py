@@ -17,7 +17,7 @@ class Job(AbstractModel):
 
 
     class Meta:
-        ordering = ('buyer', 'is_active', '-created_on',)
+        ordering = ('buyer', '-is_active', '-created_on',)
 
 
     def __unicode__(self):
