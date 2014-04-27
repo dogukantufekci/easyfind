@@ -20,5 +20,5 @@ def notifications(request):
     # Get jobs
     notifications = db.notifications.find({})
     # Respond
-    response = {'data': notifications}
+    response = {'data': list(notifications)}
     return HttpResponse(json.dumps(response, sort_keys=True, indent=4, cls=DjangoJSONEncoder), content_type="application/json")

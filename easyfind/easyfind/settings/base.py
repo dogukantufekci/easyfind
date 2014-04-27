@@ -286,6 +286,8 @@ AUTH_USER_MODEL = 'users.User'
 AUTHENTICATION_BACKENDS = (
     # Default backend
     'django.contrib.auth.backends.ModelBackend',
+    # Additional backend for facebook connections
+    'connect.backends.ConnectPayPalBackend',
 )
 ########## END AUTH CONFIGURATION
 

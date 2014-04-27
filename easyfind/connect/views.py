@@ -16,7 +16,7 @@ from users.models import User
 @csrf_exempt
 def paypal(request):
     # Check secret key
-    secret_key = request.POST.get('secret_key')
+    secret_key = request.GET.get('secret_key')
     if not secret_key:
         response = {'error': 'Secret Key is missing.'}
         return HttpResponse(json.dumps(response), content_type="application/json")
