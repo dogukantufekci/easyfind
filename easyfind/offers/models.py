@@ -19,6 +19,7 @@ class Offer(AbstractModel):
 
     class Meta:
         ordering = ('job', '-status', '-created_on',)
+        unique_together = ('job', 'seller',)
 
 
     def __unicode__(self):
