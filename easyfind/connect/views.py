@@ -11,6 +11,8 @@ from django.views.decorators.http import require_POST
 
 from users.models import User
 
+from .tools import zeropush_register
+
 
 @require_POST
 @csrf_exempt
@@ -48,8 +50,7 @@ def paypal(request):
         # Get or create iOS Device
         device, created = PushDevice.objects.get_or_create(token=device_token, user=user)
         if created:
-            # requests
-            pass
+            zeropush_register(device)
 
         # Respond
         response = {'data': {'user_id': user.id}}
@@ -72,8 +73,7 @@ def paypal(request):
     # Get or create iOS Device
     device, created = PushDevice.objects.get_or_create(token=device_token, user=user)
     if created:
-        # requests
-        pass
+        zeropush_register(device)
     
     # Respond
     response = {'data': {'user_id': user.id}}
