@@ -1,9 +1,9 @@
 import json
 
 import pymongo
+from bson import json_util
 
 from django.conf import settings
-from django.core.serializers.json import DjangoJSONEncoder
 from django.http import HttpResponse
 from django.views.decorators.http import require_http_methods
 
@@ -21,4 +21,4 @@ def notifications(request):
     notifications = db.notifications.find({})
     # Respond
     response = {'data': list(notifications)}
-    return HttpResponse(json.dumps(response, sort_keys=True, indent=4, cls=DjangoJSONEncoder), content_type="application/json")
+    return HttpResponse(json.dumps(response, sort_keys=True, indent=4, default=json_util.default))
