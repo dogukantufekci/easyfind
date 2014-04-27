@@ -41,6 +41,7 @@ def jobs(request):
                 },
                 'start_on': localtime(job.start_on),
                 'start_asap': job.start_asap,
+                'is_active': job.is_active,
             })
         # Respond
         response = {'data': data}
@@ -72,6 +73,7 @@ def jobs(request):
                     },
                     'start_on': localtime(job.start_on),
                     'start_asap': job.start_asap,
+                    'is_active': job.is_active,
                 },
             }
         else:
@@ -105,6 +107,7 @@ def job(request, job_id):
         },
         'start_on': localtime(job.start_on),
         'start_asap': job.start_asap,
+        'is_active': job.is_active,
     }}
     return HttpResponse(json.dumps(response, sort_keys=True, indent=4, cls=DjangoJSONEncoder), content_type="application/json")
 
