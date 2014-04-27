@@ -17,6 +17,7 @@ urlpatterns = patterns('',
     url(r'^api/offers/', include('offers.urls', namespace='offers', app_name='offers')),
     url(r'^api/sellers/', include('sellers.urls', namespace='sellers', app_name='sellers')),
 
+    (r'^buy/$', 'views.buy'), # purchase callback
     # django admin
     url(r'^admin/', include(admin.site.urls))
 )
