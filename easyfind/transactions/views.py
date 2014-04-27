@@ -6,6 +6,7 @@ from django.http import HttpResponse
 
 
 
+
 def buy(request):
     paypalrestsdk.configure({
         "mode": settings.PAYPAL_MODE,
@@ -23,9 +24,8 @@ def buy(request):
 
         # ###Redirect URLs
         "redirect_urls": {
-            "return_url": settings.PAYPAL_RETURN_URL,
-            "cancel_url": settings.PAYPAL_CANCEL_URL,
-        },
+            "return_url": "https://veyselsahin.com.tr/onur/api/payment_callback",
+            "cancel_url": "http://localhost:3000/"},
 
         # ###Transaction
         # A transaction defines the contract of a
@@ -47,7 +47,7 @@ def buy(request):
                              "amount": {
                                  "total": "0.10",
                                  "currency": "USD"},
-                             "description": "This is the payment transaction description."}]})
+                             "description": "This is the payment transaction description......"}]})
 
     # Create Payment and return status
     if payment.create():
