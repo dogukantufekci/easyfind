@@ -42,7 +42,7 @@ class UserManager(BaseUserManager):
 class User(AbstractBaseUser, PermissionsMixin):
     NAME_MAX_LENGTH = 30
     PAYPAL_ID_MAX_LENGTH = 255
-    USERNAME_MAX_LENGTH = 30
+    USERNAME_MAX_LENGTH = 255
     EMAIL_MAX_LENGTH = 255
     LANGUAGE_MAX_LENGTH = 5
     TIMEZONE_MAX_LENGTH = 32
