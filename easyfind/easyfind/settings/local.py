@@ -54,7 +54,6 @@ CACHES = {
 # See: http://django-debug-toolbar.readthedocs.org/en/latest/installation.html#explicit-setup
 INSTALLED_APPS += (
     'debug_toolbar',
-    'easyfind',
 )
 
 MIDDLEWARE_CLASSES += (
@@ -81,6 +80,8 @@ ZEROPUSH_AUTH_TOKEN = 'TyjXXmyiai8XAqMyzEsQ'
 MONGO_URI = "mongodb://dogukan:krl152..@oceanic.mongohq.com:10002/easyfind-development"
 ########## END MONGO CLIENT CONFIGURATION
 
+
+########## PAYPAL CONFIGURATION
 PAYPAL_USER = 'onurorhan04_api1.gmail.com'
 PAYPAL_PWD = 'ATVUGURAFTUCSPN6'
 PAYPAL_SIGNATURE = 'AjRpbG13pwOF1c9qbYMVtt3025jKAH7IP4igsr9P4g.SZUfHXYn7et7c'
@@ -91,8 +92,10 @@ PAYPAL_MODE = 'sandbox'
 PAYPAL_CLIENT_ID = 'AejOzhC_VvajEjTWdfpzGEYFgvs_sAP3Bi6iGwnOGpSLJBJKfT5ofp03KK0h'
 PAYPAL_CLIENT_SECRET = 'EAyF3hCuvxIxZ9MMLMvyx_FWvkz-0xyzeAOhmbWs2nop_fUeQDaX8dbomlYi'
 
-PAYPAL_RETURN_URL = 'http://127.0.0.1:8000'
+PAYPAL_RETURN_URL = "https://veyselsahin.com.tr/onur/api/payment_callback"
+PAYPAL_CANCEL_URL = "http://localhost:3000/"
 
 # sandbox
 PAYPAL_URL = 'https://www.sandbox.paypal.com/au/cgi-bin/webscr'
 PAYPAL_PDT_URL = 'https://www.sandbox.paypal.com/au/cgi-bin/webscr'
+########## END PAYPAL CONFIGURATION

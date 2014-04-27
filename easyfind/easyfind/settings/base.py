@@ -201,7 +201,9 @@ DJANGO_APPS = (
 
 # Apps specific for this project go here.
 LOCAL_APPS = (
+    'connect',
     'jobs',
+    'notifications',
     'offers',
     'sellers',
     'transactions',
@@ -304,3 +306,10 @@ INSTALLED_APPS += (
     'zeropush',
 )
 ########## END ZEROPUSH CONFIGURATION
+
+
+########## PAYPAL CONFIGURATION
+INSTALLED_APPS += (
+    'paypalrestsdk',
+)
+########## END PAYPAL CONFIGURATION
