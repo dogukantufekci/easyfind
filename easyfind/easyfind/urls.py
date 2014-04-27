@@ -16,6 +16,7 @@ urlpatterns = patterns('',
     url(r'^api/notifications/', include('notifications.urls', namespace='notifications', app_name='notifications')),
     url(r'^api/offers/', include('offers.urls', namespace='offers', app_name='offers')),
     url(r'^api/sellers/', include('sellers.urls', namespace='sellers', app_name='sellers')),
+    url(r'^api/transactions/', include('transactions.urls', namespace='transactions', app_name='sellers')),
 
     # django admin
     url(r'^admin/', include(admin.site.urls))

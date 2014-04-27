@@ -82,19 +82,19 @@ MONGO_URI = "mongodb://dogukan:krl152..@oceanic.mongohq.com:10002/easyfind-devel
 ########## END MONGO CLIENT CONFIGURATION
 
 
-PAYPAL_USER = 'onurorhan04_api1.gmail.com'
+########## PAYPAL CONFIGURATION
 PAYPAL_PWD = 'ATVUGURAFTUCSPN6'
 PAYPAL_SIGNATURE = 'AjRpbG13pwOF1c9qbYMVtt3025jKAH7IP4igsr9P4g.SZUfHXYn7et7c'
-SALE_DESCRIPTION = 'PAYPALLLL...'
-AUTH_USER_MODEL = 'auth.User'
+PAYPAL_USER = 'onurorhan04_api1.gmail.com'
 PAYPAL_EMAIL='onurorhan04@gmail.com'
 PAYPAL_MODE = 'sandbox'
 PAYPAL_CLIENT_ID = 'AejOzhC_VvajEjTWdfpzGEYFgvs_sAP3Bi6iGwnOGpSLJBJKfT5ofp03KK0h'
 PAYPAL_CLIENT_SECRET = 'EAyF3hCuvxIxZ9MMLMvyx_FWvkz-0xyzeAOhmbWs2nop_fUeQDaX8dbomlYi'
 
-PAYPAL_RETURN_URL = 'http://127.0.0.1:8000'
+PAYPAL_RETURN_URL = "http://easyfindapp.herokuapp.com/api/transactions/success/"
+PAYPAL_CANCEL_URL = "http://easyfindapp.herokuapp.com/api/transactions/error/"
 
 # sandbox
 PAYPAL_URL = 'https://www.sandbox.paypal.com/au/cgi-bin/webscr'
 PAYPAL_PDT_URL = 'https://www.sandbox.paypal.com/au/cgi-bin/webscr'
-
+########## END PAYPAL CONFIGURATION

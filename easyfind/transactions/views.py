@@ -1,3 +1,11 @@
+import json
+
+from django.conf import settings
+from django.http import HttpResponse
+from django.views.decorators.http import require_http_methods
+
+from easyfind.decorators import authenticate_request
+
 import paypalrestsdk
 from paypalrestsdk import Payment
 
@@ -5,7 +13,9 @@ from django.conf import settings
 from django.http import HttpResponse
 
 
-def buy(request):
+@require_http_methods(['GET'])
+@authenticate_request
+def paypal_buy(request):
     paypalrestsdk.configure({
         "mode": settings.PAYPAL_MODE,
         "client_id": settings.PAYPAL_CLIENT_ID,
@@ -51,17 +61,22 @@ def buy(request):
 
     # Create Payment and return status
     if payment.create():
-    # return HttpResponse("Payment[%s] created successfully" % (payment.id))
-
-     linkler = ""
-     for link in payment.links:
-           linkler += link.href + "</br>"
-           linkler+='Method:'+link.method+"</br>"
-           if link.method == "REDIRECT":
-            redirect_url = link.href
-            #return HttpResponse("Redirect for approval: %s" % (redirect_url))
+        response = {'data': {'url': payment.links[1]}}
     else:
-        return HttpResponse("Error while creating payment:")
-        return HttpResponse(payment.error)
+        response = {'error': 'Something went wrong.'}
+    return HttpResponse(json.dumps(response, sort_keys=True, indent=4, cls=DjangoJSONEncoder), content_type="application/json")
 
-    return HttpResponse(linkler)
+@require_http_methods(['GET'])
+@authenticate_request
+def paypal_cancel(request):
+    # Respond
+    response = {'data': {'url': }}
+    return HttpResponse(json.dumps(response, sort_keys=True, indent=4, cls=DjangoJSONEncoder), content_type="application/json")
+
+
+@require_http_methods(['GET'])
+@authenticate_request
+def paypal_return(request):
+    # Respond
+    response = {'data': {'url': }}
+    return HttpResponse(json.dumps(response, sort_keys=True, indent=4, cls=DjangoJSONEncoder), content_type="application/json")
