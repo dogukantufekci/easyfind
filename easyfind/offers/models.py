@@ -17,5 +17,10 @@ class Offer(AbstractModel):
     status = models.PositiveIntegerField(choices=Statuses.CHOICES, default=Statuses.WAITING,verbose_name=_("Status"))
     
 
+    class Meta:
+        ordering = ('job', '-status', '-created_on',)
+        unique_together = ('job', 'seller',)
+
+
     def __unicode__(self):
         return _(u"{seller}'s offer for Job {job} is {price}").format(seller=self.seller.user.get_full_name(), job=self.job.id, price=self.price)
