@@ -78,6 +78,3 @@ def paypal(request):
     # Respond
     response = {'data': {'user_id': user.id}}
     return HttpResponse(json.dumps(response, sort_keys=True, indent=4, cls=DjangoJSONEncoder), content_type="application/json")
-
-
-    

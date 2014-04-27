@@ -58,7 +58,7 @@ DATABASES = {
 
 ########## GENERAL CONFIGURATION
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#time-zone
-TIME_ZONE = 'Europe/Istanbul'
+TIME_ZONE = 'Asia/Nicosia'
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#language-code
 LANGUAGE_CODE = 'en'
@@ -170,7 +170,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'easyfind.middleware.TimezoneMiddleware',
+    'lezizfirsat_vb.middleware.TimezoneMiddleware',
 )
 ########## END MIDDLEWARE CONFIGURATION
 
@@ -201,7 +201,9 @@ DJANGO_APPS = (
 
 # Apps specific for this project go here.
 LOCAL_APPS = (
+    'connect',
     'jobs',
+    'notifications',
     'offers',
     'sellers',
     'transactions',
@@ -282,6 +284,11 @@ LOCALE_PATHS = (
 # https://docs.djangoproject.com/en/1.6/ref/settings/#auth-user-model
 AUTH_USER_MODEL = 'users.User'
 
+LOGIN_URL = '/auth/login/'
+LOGIN_REDIRECT_URL = '/deals/'
+LOGOUT_URL = '/auth/logout/'
+LOGOUT_REDIRECT_URL = '/auth/logout/after/'
+
 # https://docs.djangoproject.com/en/1.6/ref/settings/#authentication-backends
 AUTHENTICATION_BACKENDS = (
     # Default backend
@@ -304,3 +311,10 @@ INSTALLED_APPS += (
     'zeropush',
 )
 ########## END ZEROPUSH CONFIGURATION
+
+
+########## PAYPAL CONFIGURATION
+INSTALLED_APPS += (
+    'paypalrestsdk',
+)
+########## END PAYPAL CONFIGURATION
